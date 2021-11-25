@@ -12,10 +12,9 @@ document = Document()
 #p.add_run('bold').bold = True
 #p.add_run(' and some ')
 #p.add_run('italic.').italic = True
-#i=0
-#while i<10:
 
 table = document.add_table(rows=26, cols=2)
+document.add_page_break()
 
 table.cell (0,0) .text = sheet_ranges['A41'].value
 table.cell (1,0) .text = sheet_ranges['A42'].value
@@ -43,15 +42,17 @@ table.cell (22,0) .text = sheet_ranges['A63'].value
 table.cell (23,0) .text = sheet_ranges['A64'].value
 table.cell (24,0) .text = sheet_ranges['A65'].value
 table.cell (25,0) .text = sheet_ranges['A66'].value
+
 table.cell (0,1) .text = sheet_ranges['B41'].value
 table.cell (1,1) .text = sheet_ranges['B42'].value
 table.cell (2,1) .text = sheet_ranges['B43'].value
 table.cell (3,1) .text = sheet_ranges['B44'].value
 table.cell (4,1) .text = sheet_ranges['B45'].value
 table.cell (5,1) .text = sheet_ranges['B46'].value
+        
 
 
-#document.add_paragraph(sheet_ranges['A41:A66'].value)
+document.add_paragraph(sheet_ranges['A41'].value)
 document.add_page_break()
 
 document.save('demo.docx')
