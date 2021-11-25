@@ -3,19 +3,23 @@ from docx import Document
 from docx.shared import Inches
 
 wb = load_workbook(filename = 'C:\Table_to_word\Table_to_word\Михайлюцька ТГ.xlsx')
+sheet = wb.active
 sheet_ranges = wb['Копія аркуша для акта інвент(2)']
 print(sheet_ranges['A41'].value)
 
 document = Document()
 
 
-#p.add_run('bold').bold = True
+#p.add_run('string').bold = True
 #p.add_run(' and some ')
 #p.add_run('italic.').italic = True
-a="A"+41
-print(a)
-a41 = sheet_ranges['A41'].value
 
+a41 = sheet_ranges['A41'].value
+for row in sheet.rows:
+    string = ''
+    for cell in row:
+        string = string + str(cell.value) + ' '
+    print(string)
 table = document.add_table(rows=26, cols=2)
 document.add_page_break()
 
@@ -56,6 +60,7 @@ table.cell (5,1) .text = sheet_ranges['B46'].value
 document.add_page_break()
 
 document.add_paragraph(sheet_ranges['A41'].value)
+document.add_paragraph(string)
 document.add_page_break()
 
 document.save('demo.docx')
