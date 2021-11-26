@@ -1,6 +1,11 @@
 from openpyxl import load_workbook
 from docx import Document
 from docx.shared import Inches
+from docx.shared import Mm
+from docx.shared import Pt
+
+
+
 gromada = input('Введіть назву громади: ')
 name = "C:\Громади\\" + gromada + " ТГ.xlsx"
 #name = "..\\" + gromada + " ТГ.xlsx"
@@ -17,6 +22,18 @@ def make_rows_bold(*rows):
                     run.font.bold = True
 
 document = Document()
+section = document.sections[0]
+section.page_height = Mm(297)
+section.page_width = Mm(210)
+section.left_margin = Mm(30)
+section.right_margin = Mm(10)
+section.top_margin = Mm(20)
+section.bottom_margin = Mm(20)
+
+style = document.styles['Normal']
+font = style.font
+font.name = 'Times New Roman'
+font.size = Pt(10)
 
 
 bb = input('Скільки таблиць потрібно створити? ')
@@ -111,7 +128,7 @@ while i < bb1 and col < bb2:
 	table.cell (23,1) .text = b64
 	table.cell (24,1) .text = b65
 	table.cell (25,1) .text = " "
-
+    
 	make_rows_bold(table.rows[0], table.rows[10])
 
 	col=col+1
@@ -125,4 +142,5 @@ while i < bb1 and col < bb2:
 
 
 save_name = 'Акт ' + gromada +' ТГ.docx'
+print(save_name)
 document.save(save_name)
