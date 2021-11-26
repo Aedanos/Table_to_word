@@ -4,11 +4,9 @@ from docx.shared import Inches
 from docx.shared import Mm
 from docx.shared import Pt
 
-
-
 gromada = input('Введіть назву громади: ')
 name = "C:\Громади\\" + gromada + " ТГ.xlsx"
-#name = "..\\" + gromada + " ТГ.xlsx"
+
 print(name)
 wb = load_workbook (filename = name)
 sheet = wb.active
@@ -22,6 +20,7 @@ def make_rows_bold(*rows):
                     run.font.bold = True
 
 document = Document()
+
 section = document.sections[0]
 section.page_height = Mm(297)
 section.page_width = Mm(210)
@@ -42,8 +41,8 @@ i =0
 col = 2
 bb1 = bb + 2
 bb2 = bb + 2
+
 while i < bb1 and col < bb2:
-	
 	table = document.add_table(rows=26, cols=2, style = 'Table Grid')
 	c = table.columns[0].cells
 	c[0].text = sheet_ranges['A41'].value
@@ -137,10 +136,6 @@ while i < bb1 and col < bb2:
 	print ( i, col )
 	document.add_paragraph(' ')
 	
-	
-
-
-
 save_name = 'Акт ' + gromada +' ТГ.docx'
 print(save_name)
 document.save(save_name)
