@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 from docx import Document
 from docx.shared import Inches
 gromada = input('Введіть назву громади: ')
-name = "С:\Громади\\" + gromada + " ТГ.xlsx"
+name = "C:\Громади\\" + gromada + " ТГ.xlsx"
 #name = "..\\" + gromada + " ТГ.xlsx"
 print(name)
 wb = load_workbook (filename = name)
@@ -76,7 +76,7 @@ while i < bb1 and col < bb2:
 	b56=sheet.cell(row=56, column=col).value
 	b57=sheet.cell(row=57, column=col).value
 	b58=sheet.cell(row=58, column=col).value
-	b59=sheet.cell(row=53, column=col).value
+	b59=sheet.cell(row=59, column=col).value
 	b60=sheet.cell(row=60, column=col).value
 	b61=sheet.cell(row=61, column=col).value
 	b62=sheet.cell(row=62, column=col).value
