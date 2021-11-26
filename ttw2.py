@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 from docx import Document
 from docx.shared import Inches
 gromada = input('Введіть назву громади: ')
-name = "D:\Громади\\" + gromada + " ТГ.xlsx"
+name = "С:\Громади\\" + gromada + " ТГ.xlsx"
 #name = "..\\" + gromada + " ТГ.xlsx"
 print(name)
 wb = load_workbook (filename = name)
