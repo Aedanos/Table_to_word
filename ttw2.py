@@ -110,6 +110,9 @@ while i < bb1 and col < bb2:
 	table.cell (6,1) .text = b47
 	table.cell (7,1) .text = b48
 	table.cell (8,1) .text = b49
+	print(table.cell (8,1).text)
+	
+	print(table.cell (8,1).text)
 	table.cell (9,1) .text = b50
 	table.cell (10,1) .text = b51
 	table.cell (11,1) .text = b52
