@@ -1,3 +1,4 @@
+import docx
 from openpyxl import load_workbook
 from docx import Document
 from docx.shared import Inches
@@ -6,8 +7,29 @@ from docx.shared import Pt
 
 gromada = input('Введіть назву громади: ')
 name = "C:\Громади\\" + gromada + " ТГ.xlsx"
-
 print(name)
+tup_gr = int(input('Введіть тип громади(1-міська, 2-селищна, 3-сільська): '))
+rayon = int(input('Введіть район(1-Шепетівський, 2-Хмельницький, 3-Кам-Подільський): '))
+if tup_gr==1:
+	tup="міської"
+else:
+	if tup_gr==2:
+		tup="селищної"
+	else:
+		if tup_gr==3:
+			tup="сільської"	
+
+if rayon==1:
+	raj="Шепетівського"
+else:
+	if rayon==2:
+		raj="Хмельницького"
+	else:
+		if rayon==3:
+			raj="Кам'янець-Подільського"	
+
+
+
 wb = load_workbook (filename = name)
 sheet = wb.active
 sheet_ranges = wb['Копія аркуша для акта інвент(2)']
@@ -19,7 +41,7 @@ def make_rows_bold(*rows):
                 for run in paragraph.runs:
                     run.font.bold = True
 
-document = Document()
+document = Document("C:\Громади\Акт.docx")
 
 section = document.sections[0]
 section.page_height = Mm(297)
@@ -32,18 +54,44 @@ section.bottom_margin = Mm(20)
 style = document.styles['Normal']
 font = style.font
 font.name = 'Times New Roman'
-font.size = Pt(10)
+font.size = Pt(12)
+
+stylet = document.styles['Table Grid']
+fontt = stylet.font
+fontt.name = 'Times New Roman'
+fontt.size = Pt(10)
 
 
-bb = input('Скільки таблиць потрібно створити? ')
-bb = int(bb)
+gr2=gromada[:-1]+"ої"
+Dictionary = {"Грицівської": gr2, "селищної": tup, "Шепетівського": raj}
+
+for i in Dictionary:
+    for p in document.paragraphs:
+        if p.text.find(i)>=0:
+            p.text=p.text.replace(i,Dictionary[i])
+#for p in document.paragraphs:
+#    inline = p.runs
+#    for i in range(len(inline)):
+#        text = inline[i].text
+#        if text in Dictionary.keys():
+#            text=text.replace(text,Dictionary[text])
+#            inline[i].text = text
+
+
+#bb = input('Скільки таблиць потрібно створити? ')
+bb = int(sheet.cell(row=67, column=1).value)
 i =0
 col = 2
 bb1 = bb + 2
 bb2 = bb + 2
 
+#document.paragraphs[1].runs.style.font.size = Pt(12)
+#document.paragraphs[1].style.font.size = Pt(12)
+#print(document.paragraphs[1].text)
+
+
 while i < bb1 and col < bb2:
-	table = document.add_table(rows=26, cols=2, style = 'Table Grid')
+	table = document.add_table(rows=26, cols=2, style = stylet)
 	c = table.columns[0].cells
 	c[0].text = sheet_ranges['A41'].value
 	c[1].text = sheet_ranges['A42'].value
@@ -138,7 +186,11 @@ while i < bb1 and col < bb2:
 	
 	print ( i, col )
 	document.add_paragraph(' ')
-	
-save_name = 'Акт ' + gromada +' ТГ.docx'
+
+#print(document.paragraphs[71].text)
+#document.paragraphs[71].style.font.size = Pt(10)	
+
+
+save_name = 'Акт інвентаризації ' + gromada +' ТГ.docx'
 print(save_name)
 document.save(save_name)
