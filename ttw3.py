@@ -54,7 +54,7 @@ section.bottom_margin = Mm(20)
 style = document.styles['Normal']
 font = style.font
 font.name = 'Times New Roman'
-font.size = Pt(12)
+font.size = Pt(10)
 
 stylet = document.styles['Table Grid']
 fontt = stylet.font
