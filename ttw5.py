@@ -74,59 +74,91 @@ if 1 in gromady:
 	raj="Шепетівського"
 	print(raj)
 
+n_gr=0
+#def select_gr():
+#	grom=tup_gr.get()
+gromada="Uhjvflf"
+name="ss"
+#def select_raj():
+#	ra=rayon.get()
+#
 
-def select_gr():
-	grom=tup_gr.get()
 
-def select_raj():
-	ra=rayon.get()
-
-def get_gr():
-	g_a=gromada.get()
-	print(gromada)
 
 win=tk.Tk()
 win.title('Інвентаризатор')
-win.geometry("500x500+250+20")
+win.geometry("500x200+250+20")
 win.resizable(False,False)
 
-tup_gr = tk.IntVar()
-rayon = tk.IntVar()
-gromada=tk.IntVar()
-g_a=tk.IntVar()
+#tup_gr = tk.IntVar()
+#rayon = tk.IntVar()
+
+
+
+def get_gr():
+	n_gr=int(com.current())
+	print(n_gr, gromada, name)
+    
+#if n_gr>0:
+#    gromada=str(gromady.get(n_gr))
+#    print(gromada)
+#else:
+#    n_gr==2
+#    gromada=str(gromady.get(n_gr))
+#    print(gromada)
+#name = "C:\Громади\\" + gromada + " ТГ.xlsx"
+print(name)
+
+def gri():
+        gromada=str(gromady.get(n_gr))
+        print(gromada)
+#tk.Label(win,text="Виберіть тип громади:").pack()
+#tk.Radiobutton(win,text="міська",variable=tup_gr,value=1,command=select_gr()).pack()
+#tk.Radiobutton(win,text="селищна",variable=tup_gr,value=2,command=select_gr()).pack()
+#tk.Radiobutton(win,text="сільська",variable=tup_gr,value=3,command=select_gr()).pack()
+#
+#tk.Label(win,text="Виберіть район:").pack()
+#tk.Radiobutton(win,text="Шепетівський",variable=rayon,value=1,command=select_raj()).pack()
+#tk.Radiobutton(win,text="Хмельницький",variable=rayon,value=2,command=select_raj()).pack()
+#tk.Radiobutton(win,text="Кам'янець-Подільський",variable=rayon,value=3,command=select_raj()).pack()
+
+l1 = tk.Label(win,text="Виберіть громаду:")
+com=Combobox(win,values=list(gromady.values()), width=50, height=50)
+
+l1.pack()
+com.pack()
 print(gromada)
 
 
-
-tk.Label(win,text="Виберіть тип громади:").pack()
-tk.Radiobutton(win,text="міська",variable=tup_gr,value=1,command=select_gr()).pack()
-tk.Radiobutton(win,text="селищна",variable=tup_gr,value=2,command=select_gr()).pack()
-tk.Radiobutton(win,text="сільська",variable=tup_gr,value=3,command=select_gr()).pack()
-
-tk.Label(win,text="Виберіть район:").pack()
-tk.Radiobutton(win,text="Шепетівський",variable=rayon,value=1,command=select_raj()).pack()
-tk.Radiobutton(win,text="Хмельницький",variable=rayon,value=2,command=select_raj()).pack()
-tk.Radiobutton(win,text="Кам'янець-Подільський",variable=rayon,value=3,command=select_raj()).pack()
-
-tk.Label(win,text="Введіть громаду:").pack()
-com=Combobox(win,values=list(gromady.values()))
-print(com)
-com.pack()
+but=tk.Button(win,text="Створити акт інвентаризації", command=get_gr, width=50, height=50)
+but.pack()
 #for g_a in sorted(gromady):
 #	com=Combobox(win,values=gromady)
 #	com.pack()
 #	tk.Radiobutton(win,text=gromady[g_a],variable=gromada,value=g_a,command=get_gr()).pack()
 
-tk.Button(win,text="Створити акт інвентаризації", command=get_gr).pack
-#print(gr)
+print(com.current())
 
-win.mainloop()
+
+
+print("ngr"+str(n_gr))
+
+
+if n_gr ==1 or n_gr ==2:
+    tup_gr =2
+    print(tup_gr)
+
+print(gromada)
 #gromada=com.value()
 #print(gromada)
-
+tup_gr=0
+rayon=0
+if n_gr ==1:
+    tup_gr =2
+    print(tup_gr)
 #gromada = input('Введіть назву громади: ')
-name = "C:\Громади\\" + gromada + " ТГ.xlsx"
-#print(gromada)
+
+win.mainloop()
 #tup_gr = int(input('Введіть тип громади(1-міська, 2-селищна, 3-сільська): '))
 #rayon = int(input('Введіть район(1-Шепетівський, 2-Хмельницький, 3-Кам-Подільський): '))
 if tup_gr==1:
@@ -159,7 +191,7 @@ def make_rows_bold(*rows):
             for paragraph in cell.paragraphs:
                 for run in paragraph.runs:
                     run.font.bold = True
-win.mainloop()
+
 document = Document("C:\Громади\Акт.docx")
 
 section = document.sections[0]
@@ -196,7 +228,7 @@ for i in Dictionary:
 #            text=text.replace(text,Dictionary[text])
 #            inline[i].text = text
 
-
+win.mainloop()
 #bb = input('Скільки таблиць потрібно створити? ')
 bb = int(sheet.cell(row=67, column=1).value)
 i =0
